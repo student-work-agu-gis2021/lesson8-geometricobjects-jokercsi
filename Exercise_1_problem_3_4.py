@@ -113,7 +113,7 @@ assert len(dest_points) == len(data), "Number of destination points must be the 
 # 
 
 # YOUR CODE HERE 5
-
+lines = []
 
 # CODE FOR TESTING YOUR SOLUTION
 
@@ -134,7 +134,14 @@ print('lines length:', len(lines))
 #raise NotImplementedError()
 from shapely.geometry import LineString
 
+for i in range(len(data)):
+  line = [orig_points[i], dest_points[i]]
+  lines.append(LineString(line))
+
+
+
 # CODE FOR TESTING YOUR SOLUTION
+
 
 #Test that the list has correct number of LineStrings
 assert len(lines) == len(data), "There should be as many lines as there are rows in the original data"
@@ -146,6 +153,10 @@ assert len(lines) == len(data), "There should be as many lines as there are rows
 # 
 
 # YOUR CODE HERE 7 to find total length
+total_length = 0
+
+for i in range(len(data)):
+  total_length += lines[i].length
 
 # CODE FOR TESTING YOUR SOLUTION
 
@@ -164,6 +175,18 @@ print("Total length of all lines is", round(total_length, 2))
 
 # YOUR CODE HERE 8 to define create_od_lines() and calculate_total_distance()
 
+def create_od_lines(orig ,dest):
+  for i in range(len(orig)): #len(dest) is also oK
+    line = [orig[i], dest[i]]
+    lines.append(LineString(line))
+    return lines
+
+
+def calculate_total_distance(line):
+  total_length = 0
+  for i in range(len(line)):
+    total_length += lines[i].length
+    return total_length
 
 # CODE FOR TESTING YOUR SOLUTION
 
