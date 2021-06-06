@@ -37,7 +37,7 @@ def create_line_geom(points):
   assert type(points)==list, "Input should be a list!"
   assert len(points)>=2, "LineString object requires at least three Points!"
   for i in points:
-    assert i.geom_type=='Point','All list values shoud be Shapely Point objects!'
+    assert type(i)=='Point','All list values shoud be Shapely Point objects!'
 
   return LineString(points)
 
@@ -127,6 +127,9 @@ except Exception as e:
 #  YOUR CODE HERE 6 to define get_centroid()
 
 def get_centroid(geom):
+  '''
+  centroids of LineString and Polygon, Points
+  '''
   assert type(geom) in {Point, LineString, Polygon},"Input should be a Shapely geometry!"
   return geom.centroid
 
@@ -159,6 +162,9 @@ except Exception as e:
 
 # YOUR CODE HERE 8 to define get_area()
 def get_area(polygon):
+  '''
+  get area of LineString and Polygon, Points
+  '''
   assert type(polygon) in {Point, LineString, Polygon},"Input should be a Shapely Polygon -object!"
   return polygon.area
 
@@ -187,6 +193,19 @@ except Exception as e:
 
 
 #  YOUR CODE HERE 9 to define get_length()
+
+
+
+def get_length(geom):
+  '''
+  get length of LineString and  Polygon
+  '''
+
+  assert type(geom) in {LineString, Polygon},"'geom' should be either LineString or Polygon!"
+  if type(geom)==LineString:
+    return geom.length
+  elif type(geom)==Polygon:
+    return geom.exterior.length
 
 # Test and demonstrate the usage of the function:
 
