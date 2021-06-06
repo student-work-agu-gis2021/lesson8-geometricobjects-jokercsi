@@ -12,6 +12,12 @@
 #raise NotImplementedError()
 import pandas as pd 
 
+#file route
+fp ='data/travelTimes_2015_Helsinki.txt'
+
+# ';' is separator
+data = pd.read_csv(fp, sep=';')
+
 #Check how many rows and columns there are:
 data
 
