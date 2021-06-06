@@ -8,6 +8,8 @@
 # 1: Create a function called `create_point_geom()` that has two parameters (x_coord, y_coord). Function should create a shapely `Point` geometry object and return that. 
 #    
 
+
+
 from shapely.geometry import Point, LineString, Polygon
 #YOUR CODE HERE 1 to define create_point_geom()
 
@@ -32,8 +34,11 @@ print(point1.geom_type)
 # YOUR CODE HERE 2 to define create_line_geom()
 
 def create_line_geom(points):
-  assert type(points)==list,"Input should be a list!"
-  assert len(points)>=2,"LineString object requires at least three Points!"
+  assert type(points)==list, "Input should be a list!"
+  assert len(points)>=2, "LineString object requires at least three Points!"
+  for i in points:
+    assert i.geom_type=='Point','All list values shoud be Shapely Point objects!'
+
   return LineString(points)
 
 # Demonstrate the usage of your function; For example, create a line object with two points: `Point(45.2, 22.34)` & `Point(100.22, -3.20)` and store the result in a variable called `line1`:
@@ -77,12 +82,15 @@ except Exception as e:
 def create_poly_geom(points):
   assert type(points)==list,"Input should be a list!"
   assert len(points)>=3,"Polygon object requires at least three Points!"
+  for i in points:
+    assert type(i)==tuple,"All list values should be coordinate tuples!"
+
   return Polygon(points)
 
 
 # Demonstrate the usage of the function. For example, create a Polygon with three points: `(45.2, 22.34)`, `(100.22, -3.20)` & `(70.0, 10.20)`.
 
-points = [Point(45.2, 22.34), Point(100.22, -3.20), Point(70.0, 10.20)]
+points = [(45.2, 22.34), (100.22, -3.20),(70.0, 10.20)]
 
 
 # YOUR CODE HERE 5 to define poly1 with three points
@@ -118,16 +126,16 @@ except Exception as e:
 
 #  YOUR CODE HERE 6 to define get_centroid()
 
-def get_centroid(a):
-
-  return a.centroid
+def get_centroid(geom):
+  assert type(geom) in {Point, LineString, Polygon},"Input should be a Shapely geometry!"
+  return geom.centroid
 
 
 # Test and demonstrate the usage of the function. You can, for example, create shapely objects using the functions you created in problem 1 and print out information about their centroids:
 # 
 
 #  YOUR CODE HERE 7 to define some objects
-poly1 = LineString([(2.2, 4.2), (7.2, -25.1), (9.26, -2.456)])
+poly1 = Polygon([(45.2, 22.34), (100.22, -3.20), (70.0, 10.20)])
 
 
 # CODE FOR TESTING YOUR SOLUTION
@@ -150,6 +158,10 @@ except Exception as e:
 #    - Inside the function, you should first check with `assert` -functionality that the input is a Shapely Polygon geometry (see [lesson 6](https://geo-python.github.io/site/lessons/L6/interpreting-errors.html#assertions) and [hints](https://automating-gis-processes.github.io/site/develop/lessons/L1/exercise-1.html#hints)). If something else than a list is passed for the function, you should return an Error message: `"Input should be a Shapely Polygon -object!"`
 
 # YOUR CODE HERE 8 to define get_area()
+def get_area(polygon):
+  assert type(polygon) in {Point, LineString, Polygon},"Input should be a Shapely Polygon -object!"
+  return polygon.area
+
 
 # Test and demonstrate the usage of the function:
 get_area(poly1)
