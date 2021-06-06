@@ -41,6 +41,8 @@ print(data.head())
 # 
 
 # YOUR CODE HERE 3 to define empty lists orig_points and dest_points
+orig_points = []
+dest_points = []
 
 # CODE FOR TESTING YOUR SOLUTION
 
@@ -75,6 +77,16 @@ print('dest_points length:', len(dest_points))
 
 # YOUR CODE HERE 4 to append points in orig_points and dest_points
 from shapely.geometry import Point
+
+for index,i in data.iterrows():
+
+  # origin_coord = Point(data[i, 'from_x'], data[i, 'from_y'])
+  origin_coord = Point(i['from_x'], i['from_y'])
+  orig_points.append(origin_coord)
+  
+  # dest_coord = Point(data[i, 'to_x'], data[i, 'to_y'])
+  dest_coord = Point(i['to_x'], i['to_y'])
+  dest_points.append(dest_coord)
 
 # CODE FOR TESTING YOUR SOLUTION
 
