@@ -19,7 +19,6 @@ fp ='data/travelTimes_2015_Helsinki.txt'
 data = pd.read_csv(fp, sep=';')
 
 #Check how many rows and columns there are:
-data
 
 # CODE FOR TESTING YOUR SOLUTION
 
@@ -32,9 +31,11 @@ print(data.head())
 
 # YOUR CODE HERE 2 to set `data`
 
+data = data[['from_x', 'from_y', 'to_x', 'to_y']]
+
 # CODE FOR TESTING YOUR SOLUTION
 print(list(data.columns))
-
+print(data.head())
 
 # 3: Create two empty lists called **`orig_points`** and **`dest_points`**. We will store the shapely points in these lists in the next step.
 # 
